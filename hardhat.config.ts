@@ -11,7 +11,10 @@ const config: HardhatUserConfig = {
     compilerSource: "binary",
     settings: {
       compilerPath: "~/.cargo/bin/resolc-0.1.0-dev.16",
-    }
+    },
+  },
+  mocha: {
+    timeout: 100000
   },
   networks: {
     hardhat: {
@@ -34,7 +37,6 @@ const config: HardhatUserConfig = {
         process.env.AH_PRIV_KEY as string,
       ],
     },
-
     ah: {
       polkavm: true,
       url: "https://westend-asset-hub-eth-rpc.polkadot.io",

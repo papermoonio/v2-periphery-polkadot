@@ -1,6 +1,9 @@
 import { ethers } from "hardhat";
-import { Contract } from "ethers";
+import { Contract, Wallet } from "ethers";
 import { parseEther, keccak256, AbiCoder, toUtf8Bytes, solidityPacked } from "ethers";
+import { HardhatRuntimeEnvironment } from "hardhat/types";
+
+declare const hre: HardhatRuntimeEnvironment;
 
 export const MINIMUM_LIQUIDITY = parseEther("0.001");
 
@@ -66,4 +69,13 @@ export function encodePrice(reserve0: bigint, reserve1: bigint) {
     (reserve1 * 2n ** 112n) / reserve0,
     (reserve0 * 2n ** 112n) / reserve1
   ];
+}
+
+
+// get the n wallets from hardhat config
+export function getWallets(n: number): Wallet[] {
+  const provider = new ethers.JsonRpcProvider(hre.network.config.url);
+  const accounts = hre.network.config.accounts as string[];
+  const allWallets = accounts.map((account: string) => new Wallet(account, provider));
+  return allWallets.slice(0, n);
 }

@@ -18,6 +18,9 @@
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.0",
+    "@parity/hardhat-polkadot": "^0.1.5",
+    "@parity/hardhat-polkadot-node": "^0.1.2",
+    "@parity/resolc": "^0.2.0",
     "@typechain/ethers-v6": "^0.5.0",
     "@typechain/hardhat": "^9.0.0",
     "@types/chai": "^4.2.0",
@@ -30,14 +33,11 @@
     "hardhat-gas-reporter": "^1.0.8",
     "solc": "^0.8.30",
     "solidity-coverage": "^0.8.0",
-    "suvi": "link:/Users/suvi",
     "ts-node": ">=8.0.0",
     "typechain": "^8.3.0",
-    "typescript": ">=4.5.0",
-    "@parity/hardhat-polkadot": "^0.1.5"
+    "typescript": ">=4.5.0"
   },
   "dependencies": {
-
     "@uniswap/lib": "github:sekisamu/uniswap-lib-polkadot",
     "@uniswap/v2-core": "github:papermoonio/uniswap-v2-polkadot"
   }

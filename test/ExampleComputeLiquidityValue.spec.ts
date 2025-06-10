@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { Contract } from "ethers";
-import { expandTo18Decimals } from "./shared/utilities";
+import { expandTo18Decimals, getWallets } from "./shared/utilities";
 import { v2Fixture } from "./shared/fixtures";
 
 describe("ExampleComputeLiquidityValue", () => {
@@ -12,10 +12,8 @@ describe("ExampleComputeLiquidityValue", () => {
   let computeLiquidityValue: Contract;
   let router: Contract;
   let wallet: any;
+  let walletForLargeContract: any;
 
-  const overrides = {
-    gasLimit: 9999999
-  };
 
   beforeEach(async function() {
     const [signer] = await ethers.getSigners();
@@ -26,8 +24,9 @@ describe("ExampleComputeLiquidityValue", () => {
     pair = fixture.pair;
     factory = fixture.factoryV2;
     router = fixture.router;
+    [walletForLargeContract] = getWallets(1);
 
-    const ExampleComputeLiquidityValue = await ethers.getContractFactory("ExampleComputeLiquidityValue");
+    const ExampleComputeLiquidityValue = await ethers.getContractFactory("ExampleComputeLiquidityValue", walletForLargeContract);
     computeLiquidityValue = await ExampleComputeLiquidityValue.deploy(await factory.getAddress()) as unknown as Contract;
     await computeLiquidityValue.waitForDeployment();
   });
@@ -35,11 +34,12 @@ describe("ExampleComputeLiquidityValue", () => {
   beforeEach("mint some liquidity for the pair at 1:100 (100 shares minted)", async () => {
     await token0.transfer(await pair.getAddress(), expandTo18Decimals(10));
     await token1.transfer(await pair.getAddress(), expandTo18Decimals(1000));
-    await pair.mint(await wallet.getAddress(), overrides);
+    await pair.mint(await wallet.getAddress());
     expect(await pair.totalSupply()).to.equal(expandTo18Decimals(100));
   });
 
-  it("correct factory address", async () => {
+  it("correct factory address", async function() {
+    this.timeout(10000000);
     expect(await computeLiquidityValue.factory()).to.equal(await factory.getAddress());
   });
 
@@ -65,14 +65,14 @@ describe("ExampleComputeLiquidityValue", () => {
     });
 
     it("correct after swap", async () => {
-      await token0.approve(await router.getAddress(), ethers.MaxUint256, overrides);
+      console.log("router address", await router.getAddress());
+      await token0.approve(await router.getAddress(), ethers.MaxUint256);
       await router.swapExactTokensForTokens(
         expandTo18Decimals(10),
         0,
         [await token0.getAddress(), await token1.getAddress()],
         await wallet.getAddress(),
-        ethers.MaxUint256,
-        overrides
+        ethers.MaxUint256
       );
       const [token0Amount, token1Amount] = await computeLiquidityValue.getLiquidityValue(
         await token0.getAddress(),
@@ -92,19 +92,18 @@ describe("ExampleComputeLiquidityValue", () => {
       beforeEach("mint more liquidity to address zero", async () => {
         await token0.transfer(await pair.getAddress(), expandTo18Decimals(10));
         await token1.transfer(await pair.getAddress(), expandTo18Decimals(1000));
-        await pair.mint(ethers.ZeroAddress, overrides);
+        await pair.mint(ethers.ZeroAddress);
         expect(await pair.totalSupply()).to.equal(expandTo18Decimals(200));
       });
 
       it("correct after swap", async () => {
-        await token0.approve(await router.getAddress(), ethers.MaxUint256, overrides);
+        await token0.approve(await router.getAddress(), ethers.MaxUint256);
         await router.swapExactTokensForTokens(
           expandTo18Decimals(20),
           0,
           [await token0.getAddress(), await token1.getAddress()],
           await wallet.getAddress(),
-          ethers.MaxUint256,
-          overrides
+          ethers.MaxUint256
         );
         const [token0Amount, token1Amount] = await computeLiquidityValue.getLiquidityValue(
           await token0.getAddress(),
@@ -273,14 +272,13 @@ describe("ExampleComputeLiquidityValue", () => {
 
       describe("after a swap", () => {
         beforeEach("swap to ~1:25", async () => {
-          await token0.approve(await router.getAddress(), ethers.MaxUint256, overrides);
+          await token0.approve(await router.getAddress(), ethers.MaxUint256);
           await router.swapExactTokensForTokens(
             expandTo18Decimals(10),
             0,
             [await token0.getAddress(), await token1.getAddress()],
             await wallet.getAddress(),
-            ethers.MaxUint256,
-            overrides
+            ethers.MaxUint256
           );
           const [reserve0, reserve1] = await pair.getReserves();
           expect(reserve0).to.equal("20000000000000000000");
@@ -324,7 +322,7 @@ describe("ExampleComputeLiquidityValue", () => {
       beforeEach("mint more liquidity to address zero", async () => {
         await token0.transfer(await pair.getAddress(), expandTo18Decimals(10));
         await token1.transfer(await pair.getAddress(), expandTo18Decimals(1000));
-        await pair.mint(ethers.ZeroAddress, overrides);
+        await pair.mint(ethers.ZeroAddress);
         expect(await pair.totalSupply()).to.equal(expandTo18Decimals(200));
       });
 
@@ -404,14 +402,13 @@ describe("ExampleComputeLiquidityValue", () => {
 
       describe("after a swap", () => {
         beforeEach("swap to ~1:25", async () => {
-          await token0.approve(await router.getAddress(), ethers.MaxUint256, overrides);
+          await token0.approve(await router.getAddress(), ethers.MaxUint256);
           await router.swapExactTokensForTokens(
             expandTo18Decimals(20),
             0,
             [await token0.getAddress(), await token1.getAddress()],
             await wallet.getAddress(),
-            ethers.MaxUint256,
-            overrides
+            ethers.MaxUint256
           );
           const [reserve0, reserve1] = await pair.getReserves();
           expect(reserve0).to.equal("40000000000000000000");
