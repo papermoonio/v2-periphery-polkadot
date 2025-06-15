@@ -28,6 +28,7 @@
     "@types/node": ">=18.0.0",
     "chai": "^4.2.0",
     "dotenv": "^16.5.0",
+    "ethereumjs-util": "^7.1.5",
     "ethers": "^6.4.0",
     "hardhat": "^2.24.0",
     "hardhat-gas-reporter": "^1.0.8",

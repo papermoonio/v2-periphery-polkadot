@@ -66,6 +66,9 @@ importers:
       dotenv:
         specifier: ^16.5.0
         version: 16.5.0
+      ethereumjs-util:
+        specifier: ^7.1.5
+        version: 7.1.5
       ethers:
         specifier: ^6.4.0
         version: 6.14.3

@@ -5,7 +5,7 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 declare const hre: HardhatRuntimeEnvironment;
 
-export const MINIMUM_LIQUIDITY = parseEther("0.001");
+export const MINIMUM_LIQUIDITY = BigInt(10)**BigInt(3);
 
 const PERMIT_TYPEHASH = keccak256(
   toUtf8Bytes('Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)')
