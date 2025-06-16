@@ -102,7 +102,7 @@ export async function v2Fixture(): Promise<V2Fixture> {
   // initialize V2
   await factoryV2.createPair(await tokenA.getAddress(), await tokenB.getAddress());
   const pairAddress = await factoryV2.getPair(await tokenA.getAddress(), await tokenB.getAddress());
-  const pair = (await ethers.getContractAt("IUniswapV2Pair", pairAddress)) as unknown as BaseContract & IUniswapV2Pair;
+  const pair = (await ethers.getContractAt("UniswapV2Pair", pairAddress)) as unknown as BaseContract & IUniswapV2Pair;
 
   const token0Address = await pair.token0();
   const token0 = (await tokenA.getAddress()) === token0Address ? tokenA : tokenB;
@@ -110,7 +110,7 @@ export async function v2Fixture(): Promise<V2Fixture> {
 
   await factoryV2.createPair(await WETH.getAddress(), await WETHPartner.getAddress());
   const WETHPairAddress = await factoryV2.getPair(await WETH.getAddress(), await WETHPartner.getAddress());
-  const WETHPair = (await ethers.getContractAt("IUniswapV2Pair", WETHPairAddress)) as unknown as BaseContract & IUniswapV2Pair;
+  const WETHPair = (await ethers.getContractAt("UniswapV2Pair", WETHPairAddress)) as unknown as BaseContract & IUniswapV2Pair;
 
   return {
     token0,
