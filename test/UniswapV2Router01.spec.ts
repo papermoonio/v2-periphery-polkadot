@@ -52,7 +52,7 @@ describe('UniswapV2Router{01,02}', () => {
         expect(await router.WETH()).to.eq(await WETH.getAddress())
       })
 
-      it('addLiquidity', async () => {
+      it('addLiquidity 1', async () => {
         const token0Amount = expandTo18Decimals(1)
         const token1Amount = expandTo18Decimals(4)
 
@@ -69,10 +69,9 @@ describe('UniswapV2Router{01,02}', () => {
           wallet.address,
           MaxUint256
         );
-        await expect(
-          tx.wait()
-        )
-          .to.emit(token0, 'Transfer')
+
+        await expect(tx.wait())
+           .to.emit(token0, 'Transfer')
           .withArgs(wallet.address, await pair.getAddress(), token0Amount)
           .to.emit(token1, 'Transfer')
           .withArgs(wallet.address, await pair.getAddress(), token1Amount)
@@ -169,7 +168,13 @@ describe('UniswapV2Router{01,02}', () => {
         expect(await token1.balanceOf(wallet.address)).to.eq(totalSupplyToken1 - 2000n)
       })
 
-      it('removeLiquidityETH', async () => {
+      it('removeLiquidityETH-1', async () => {
+        const CodeHelper = await ethers.getContractFactory("CodeHelper");
+        const codeHelper = await CodeHelper.deploy();
+        await codeHelper.waitForDeployment();
+        const codeHash = await codeHelper.pairCodeHash();
+        console.log("codeHash: ", codeHash);
+
         const WETHPartnerAmount = expandTo18Decimals(1)
         const ETHAmount = expandTo18Decimals(4)
         await WETHPartner.transfer(await WETHPair.getAddress(), WETHPartnerAmount)
