@@ -1,11 +1,18 @@
 # Changelog
 
+## Status
+
+Most test cases have been completed, except for the following:
+
+- DecimalsPrecisionLoss related test cases
+- Permit signature related test cases
+
 ## Modification Record
 
 | Change Type                     | Description & Cause                                                                                            | Files Affected                                                                                                                                                                                                                                                                                                                              |
 | :------------------------------ | :------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Solidity Version Upgrade**    | Solidity version upgraded from 0.5.x to 0.8.x                                                                  |                                                                                                                                                                                                                                                                                                                                             |
-| **Test Workflow**               | 1. Test framework migrates from Waffle to Hardhat, <br>2. ethersv5 upgrade to ethersv6                         | test/shared/\*, <br> test/ExampleComputeLiquidityValue.spec.ts, <br>test/UExampleSlidingWindowOracle.spec.ts, <br> test/UniswapV2Router01.spec.ts, <br>test/ExampleFlashSwap.spec.ts, <br> test/ExampleSwapToPrice.spec.ts, <br> test/UniswapV2Router02.spec.ts, <br> test/ExampleOracleSimple.spec.ts, <br> test/UniswapV2Migrator.spec.ts |
+| **Test Workflow**               | 1. Test framework migrates from Waffle to Hardhat, <br>2. ethersv5 upgrade to ethersv6                         | test/shared/\*, <br> test/ExampleComputeLiquidityValue.spec.ts, <br>test/UExampleSlidingWindowOracle.spec.ts, <br> test/UniswapV2Router01.spec.ts, <br>test/ExampleFlashSwap.spec.ts, <br> test/ExampleSwapToPrice.spec.ts, <br> test/UniswapV2Router02.spec.ts, <br> test/ExampleOracleSimple.spec.ts, <br>test/UniswapV2Migrator.spec.ts, <br>test/UniswapV2Router01.spec.ts, <br>test/UniswapV2Router02.spec.ts|
 | **Contract Logic Modification** | Core changes to smart contract logic due to a fundamental incompatibility between the EVM and PolkaVM runtime. | contracts/libraries/UniswapV2Library.sol                                                                                                                                                                                                                                                                                                    |
 
 ---

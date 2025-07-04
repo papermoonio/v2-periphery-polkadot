@@ -39,7 +39,7 @@
     "typescript": ">=4.5.0"
   },
   "dependencies": {
-    "@uniswap/lib": "github:sekisamu/uniswap-lib-polkadot",
+    "@uniswap/lib": "github:papermoonio/uniswap-lib-polkadot",
     "@uniswap/v2-core": "github:papermoonio/uniswap-v2-polkadot"
   }
 }
