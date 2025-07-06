@@ -12,7 +12,7 @@ const config: HardhatUserConfig = {
   resolc: {
     compilerSource: "binary",
     settings: {
-      compilerPath: "~/.cargo/bin/resolc-0.1.0-dev.16",
+      compilerPath: "~/.cargo/bin/resolc-0.3.0",
     },
   },
   mocha: {
