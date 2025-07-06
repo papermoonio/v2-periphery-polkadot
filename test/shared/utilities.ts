@@ -15,7 +15,9 @@ export function expandTo18Decimals(n: number): bigint {
   return parseEther(n.toString());
 }
 
-function getDomainSeparator(name: string, tokenAddress: string) {
+async function getDomainSeparator(name: string, tokenAddress: string) {
+  const chainId = (await ethers.provider.getNetwork()).chainId;
+  console.log("chainId from provider:", chainId);
   return keccak256(
     AbiCoder.defaultAbiCoder().encode(
       ['bytes32', 'bytes32', 'bytes32', 'uint256', 'address'],
@@ -23,7 +25,7 @@ function getDomainSeparator(name: string, tokenAddress: string) {
         keccak256(toUtf8Bytes('EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')),
         keccak256(toUtf8Bytes(name)),
         keccak256(toUtf8Bytes('1')),
-        1n,
+        BigInt(chainId),
         tokenAddress
       ]
     )
@@ -41,7 +43,7 @@ export async function getApprovalDigest(
   deadline: bigint
 ): Promise<string> {
   const name = await token.name();
-  const DOMAIN_SEPARATOR = getDomainSeparator(name, await token.getAddress());
+  const DOMAIN_SEPARATOR = await getDomainSeparator(name, await token.getAddress());
   return keccak256(
     solidityPacked(
       ['bytes1', 'bytes1', 'bytes32', 'bytes32'],

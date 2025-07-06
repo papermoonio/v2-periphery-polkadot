@@ -245,19 +245,19 @@ describe('UniswapV2Router{01,02}', () => {
         ) as string
          const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(walletPrivKey.slice(2), 'hex'))
 
-        // await (await router.removeLiquidityWithPermit(
-        //   await token0.getAddress(),
-        //   await token1.getAddress(),
-        //   expectedLiquidity - MINIMUM_LIQUIDITY,
-        //   0,
-        //   0,
-        //   wallet.address,
-        //   MaxUint256,
-        //   false,
-        //   v,
-        //   r,
-        //   s
-        // )).wait()
+        await (await router.removeLiquidityWithPermit(
+          await token0.getAddress(),
+          await token1.getAddress(),
+          expectedLiquidity - MINIMUM_LIQUIDITY,
+          0,
+          0,
+          wallet.address,
+          MaxUint256,
+          false,
+          v,
+          r,
+          s
+        )).wait()
       })
 
       // it('removeLiquidityETHWithPermit', async () => {
