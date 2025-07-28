@@ -13,9 +13,10 @@ describe('UniswapV2Router02', () => {
   let token1: Contract
   let router: Contract
   let wallet: any
+  let walletPrivKey: string
 
   beforeEach(async function() {
-    [wallet] = await ethers.getSigners()
+  [wallet, walletPrivKey] = [(await ethers.getSigners())[0], (hre.network.config.accounts as string[])[0]]
     const fixture = await v2Fixture()
     token0 = fixture.token0
     token1 = fixture.token1
@@ -122,59 +123,59 @@ describe('fee-on-transfer tokens', () => {
     await tx.wait();
   }
 
-  // it('removeLiquidityETHSupportingFeeOnTransferTokens', async () => {
-  //   const DTTAmount = expandTo18Decimals(1)
-  //   const ETHAmount = expandTo18Decimals(4)
-  //   await addLiquidity(DTTAmount, ETHAmount)
-  //   const DTTInPair = await DTT.balanceOf(await pair.getAddress())
-  //   const WETHInPair = await WETH.balanceOf(await pair.getAddress())
-  //   const liquidity = await pair.balanceOf(await wallet.getAddress())
-  //   const totalSupply = await pair.totalSupply()
-  //   const NaiveDTTExpected = DTTInPair * liquidity / totalSupply
-  //   const WETHExpected = WETHInPair * liquidity / totalSupply
-  //   await pair.approve(await router.getAddress(), MaxUint256)
-  //   await router.removeLiquidityETHSupportingFeeOnTransferTokens(
-  //     await DTT.getAddress(),
-  //     liquidity,
-  //     NaiveDTTExpected,
-  //     WETHExpected,
-  //     await wallet.getAddress(),
-  //     MaxUint256
-  //   )
-  // })
+  it('removeLiquidityETHSupportingFeeOnTransferTokens', async () => {
+    const DTTAmount = expandTo18Decimals(1)
+    const ETHAmount = expandTo18Decimals(4)
+    await addLiquidity(DTTAmount, ETHAmount)
+    const DTTInPair = await DTT.balanceOf(await pair.getAddress())
+    const WETHInPair = await WETH.balanceOf(await pair.getAddress())
+    const liquidity = await pair.balanceOf(await wallet.getAddress())
+    const totalSupply = await pair.totalSupply()
+    const NaiveDTTExpected = DTTInPair * liquidity / totalSupply
+    const WETHExpected = WETHInPair * liquidity / totalSupply
+    await pair.approve(await router.getAddress(), MaxUint256)
+    await router.removeLiquidityETHSupportingFeeOnTransferTokens(
+      await DTT.getAddress(),
+      liquidity,
+      NaiveDTTExpected,
+      WETHExpected,
+      await wallet.getAddress(),
+      MaxUint256
+    )
+  })
 
   it('removeLiquidityETHWithPermitSupportingFeeOnTransferTokens', async () => {
-    // const DTTAmount = expandTo18Decimals(1) * 100n / 99n
-    // const ETHAmount = expandTo18Decimals(4)
-    // await addLiquidity(DTTAmount, ETHAmount)
-    // const expectedLiquidity = expandTo18Decimals(2)
-    // const nonce = await pair.nonces(await wallet.getAddress())
-    // const digest = await getApprovalDigest(
-    //   pair,
-    //   { owner: await wallet.getAddress(), spender: await router.getAddress(), value: expectedLiquidity - MINIMUM_LIQUIDITY },
-    //   nonce,
-    //   MaxUint256
-    // )
-    // const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(walletPrivKey.slice(2), 'hex'))
-    // const DTTInPair = await DTT.balanceOf(await pair.getAddress())
-    // const WETHInPair = await WETH.balanceOf(await pair.getAddress())
-    // const liquidity = await pair.balanceOf(await wallet.getAddress())
-    // const totalSupply = await pair.totalSupply()
-    // const NaiveDTTExpected = DTTInPair * liquidity / totalSupply
-    // const WETHExpected = WETHInPair * liquidity / totalSupply
-    // await pair.approve(await router.getAddress(), MaxUint256)
-    // await router.removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
-    //   await DTT.getAddress(),
-    //   liquidity,
-    //   NaiveDTTExpected,
-    //   WETHExpected,
-    //   await wallet.getAddress(),
-    //   MaxUint256,
-    //   false,
-    //   v,
-    //   r,
-    //   s
-    // )
+    const DTTAmount = expandTo18Decimals(1) * 100n / 99n
+    const ETHAmount = expandTo18Decimals(4)
+    await addLiquidity(DTTAmount, ETHAmount)
+    const expectedLiquidity = expandTo18Decimals(2)
+    const nonce = await pair.nonces(await wallet.getAddress())
+    const digest = await getApprovalDigest(
+      pair,
+      { owner: await wallet.getAddress(), spender: await router.getAddress(), value: expectedLiquidity - MINIMUM_LIQUIDITY },
+      nonce,
+      MaxUint256
+    )
+    const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(walletPrivKey.slice(2), 'hex'))
+    const DTTInPair = await DTT.balanceOf(await pair.getAddress())
+    const WETHInPair = await WETH.balanceOf(await pair.getAddress())
+    const liquidity = await pair.balanceOf(await wallet.getAddress())
+    const totalSupply = await pair.totalSupply()
+    const NaiveDTTExpected = DTTInPair * liquidity / totalSupply
+    const WETHExpected = WETHInPair * liquidity / totalSupply
+    await pair.approve(await router.getAddress(), MaxUint256)
+    await router.removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
+      await DTT.getAddress(),
+      liquidity,
+      NaiveDTTExpected,
+      WETHExpected,
+      await wallet.getAddress(),
+      MaxUint256,
+      false,
+      v,
+      r,
+      s
+    )
   })
 
   describe('swapExactTokensForTokensSupportingFeeOnTransferTokens', () => {
@@ -225,19 +226,19 @@ describe('fee-on-transfer tokens', () => {
   })
 
   it('swapExactTokensForETHSupportingFeeOnTransferTokens', async () => {
-    // const DTTAmount = expandTo18Decimals(5) * 100n / 99n
-    // const ETHAmount = expandTo18Decimals(10)
-    // const swapAmount = expandTo18Decimals(1)
-    // await addLiquidity(DTTAmount, ETHAmount)
-    // await DTT.approve(await router.getAddress(), MaxUint256)
-    // let tx = await router.swapExactTokensForETHSupportingFeeOnTransferTokens(
-    //   swapAmount,
-    //   0,
-    //   [await DTT.getAddress(), await WETH.getAddress()],
-    //   await wallet.getAddress(),
-    //   MaxUint256
-    // );
-    // await tx.wait();
+    const DTTAmount = expandTo18Decimals(5) * 100n / 99n
+    const ETHAmount = expandTo18Decimals(10)
+    const swapAmount = expandTo18Decimals(1)
+    await addLiquidity(DTTAmount, ETHAmount)
+    await DTT.approve(await router.getAddress(), MaxUint256)
+    let tx = await router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+      swapAmount,
+      0,
+      [await DTT.getAddress(), await WETH.getAddress()],
+      await wallet.getAddress(),
+      MaxUint256
+    );
+    await tx.wait();
   })
 })
 
