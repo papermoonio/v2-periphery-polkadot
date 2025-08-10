@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@uniswap/lib':
-        specifier: github:sekisamu/uniswap-lib-polkadot
-        version: deterministic-deploy-polkadot@https://codeload.github.com/sekisamu/uniswap-lib-polkadot/tar.gz/d5acbf2892b0bb9bcc9a8454d7a743a1b9e0157f(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+        specifier: github:papermoonio/uniswap-lib-polkadot
+        version: uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
       '@uniswap/v2-core':
         specifier: github:papermoonio/uniswap-v2-polkadot
         version: uniswap-v2-polkadot@https://codeload.github.com/papermoonio/uniswap-v2-polkadot/tar.gz/292b2b669d2473c8dff8b6441731f3ae389dc6bf
@@ -55,7 +55,7 @@ importers:
         specifier: ^4.2.0
         version: 4.3.20
       '@types/mocha':
-        specifier: '>=9.1.0'
+        specifier: ^10.0.10
         version: 10.0.10
       '@types/node':
         specifier: '>=18.0.0'
@@ -1035,10 +1035,6 @@ packages:
   depd@2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
-
-  deterministic-deploy-polkadot@https://codeload.github.com/sekisamu/uniswap-lib-polkadot/tar.gz/d5acbf2892b0bb9bcc9a8454d7a743a1b9e0157f:
-    resolution: {tarball: https://codeload.github.com/sekisamu/uniswap-lib-polkadot/tar.gz/d5acbf2892b0bb9bcc9a8454d7a743a1b9e0157f}
-    version: 1.0.0
 
   diff@4.0.2:
     resolution: {integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==}
@@ -2312,6 +2308,10 @@ packages:
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
     engines: {node: '>=14.0'}
+
+  uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83:
+    resolution: {tarball: https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83}
+    version: 1.0.0
 
   uniswap-v2-polkadot@https://codeload.github.com/papermoonio/uniswap-v2-polkadot/tar.gz/292b2b669d2473c8dff8b6441731f3ae389dc6bf:
     resolution: {tarball: https://codeload.github.com/papermoonio/uniswap-v2-polkadot/tar.gz/292b2b669d2473c8dff8b6441731f3ae389dc6bf}
@@ -3636,12 +3636,6 @@ snapshots:
   delayed-stream@1.0.0: {}
 
   depd@2.0.0: {}
-
-  deterministic-deploy-polkadot@https://codeload.github.com/sekisamu/uniswap-lib-polkadot/tar.gz/d5acbf2892b0bb9bcc9a8454d7a743a1b9e0157f(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)):
-    dependencies:
-      '@parity/hardhat-polkadot': 0.1.6(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
-    transitivePeerDependencies:
-      - hardhat
 
   diff@4.0.2: {}
 
@@ -5125,6 +5119,12 @@ snapshots:
   undici@5.29.0:
     dependencies:
       '@fastify/busboy': 2.1.1
+
+  uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)):
+    dependencies:
+      '@parity/hardhat-polkadot': 0.1.6(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+    transitivePeerDependencies:
+      - hardhat
 
   uniswap-v2-polkadot@https://codeload.github.com/papermoonio/uniswap-v2-polkadot/tar.gz/292b2b669d2473c8dff8b6441731f3ae389dc6bf: {}
 

@@ -12,7 +12,7 @@ const config: HardhatUserConfig = {
   resolc: {
     compilerSource: "binary",
     settings: {
-      compilerPath: "~/.cargo/bin/resolc-0.3.0",
+      compilerPath: "resolc-0.3.0",
     },
   },
   mocha: {
@@ -23,12 +23,12 @@ const config: HardhatUserConfig = {
       ? {
           polkavm: true,
           nodeConfig: {
-            nodeBinaryPath: "../../../code/polkadot-sdk/target/release/substrate-node",
+            nodeBinaryPath: "../substrate-node",
             rpcPort: 8000,
             dev: true,
           },
           adapterConfig: {
-            adapterBinaryPath: "../../../code/polkadot-sdk/target/release/eth-rpc",
+            adapterBinaryPath: "../eth-rpc",
             dev: true,
           },
         }
