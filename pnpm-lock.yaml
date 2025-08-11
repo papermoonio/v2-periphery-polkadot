@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@uniswap/lib':
         specifier: github:papermoonio/uniswap-lib-polkadot
-        version: uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+        version: uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83(@parity/hardhat-polkadot-node@0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(@parity/hardhat-polkadot-resolc@0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
       '@uniswap/v2-core':
         specifier: github:papermoonio/uniswap-v2-polkadot
         version: uniswap-v2-polkadot@https://codeload.github.com/papermoonio/uniswap-v2-polkadot/tar.gz/292b2b669d2473c8dff8b6441731f3ae389dc6bf
@@ -38,13 +38,13 @@ importers:
         version: 2.0.14(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
       '@parity/hardhat-polkadot':
         specifier: ^0.1.5
-        version: 0.1.6(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+        version: 0.1.5(@parity/hardhat-polkadot-node@0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(@parity/hardhat-polkadot-resolc@0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
       '@parity/hardhat-polkadot-node':
         specifier: ^0.1.2
         version: 0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
       '@parity/resolc':
         specifier: ^0.2.0
-        version: 0.2.0
+        version: 0.2.0(debug@4.4.1)
       '@typechain/ethers-v6':
         specifier: ^0.5.0
         version: 0.5.1(ethers@6.14.3)(typechain@8.3.2(typescript@5.8.3))(typescript@5.8.3)
@@ -80,7 +80,7 @@ importers:
         version: 1.0.10(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
       solc:
         specifier: ^0.8.30
-        version: 0.8.30
+        version: 0.8.30(debug@4.4.1)
       solidity-coverage:
         specifier: ^0.8.0
         version: 0.8.16(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
@@ -106,6 +106,11 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
+  '@ethereumjs/rlp@10.0.0':
+    resolution: {integrity: sha512-h2SK6RxFBfN5ZGykbw8LTNNLckSXZeuUZ6xqnmtF22CzZbHflFMcIOyfVGdvyCVQqIoSbGMHtvyxMCWnOyB9RA==}
+    engines: {node: '>=18'}
+    hasBin: true
+
   '@ethereumjs/rlp@4.0.1':
     resolution: {integrity: sha512-tqsQiBQDQdmPWE1xkkBq4rlSW5QZpLOUJ5RJh2/9fug+q9tnUhuZoVLk7s0scUIKTOzEtR72DFBXI4WiZcMpvw==}
     engines: {node: '>=14'}
@@ -115,6 +120,10 @@ packages:
     resolution: {integrity: sha512-DziebCdg4JpGlEqEdGgXmjqcFoJi+JGulUXwEjsZGAscAQ7MyD/7LE/GVCP29vEQxKc7AAwjT3A2ywHp2xfoCA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@ethereumjs/util@10.0.0':
+    resolution: {integrity: sha512-lO23alM4uQsv8dp6/yEm4Xw4328+wIRjSeuBO1mRTToUWRcByEMTk87yzBpXgpixpgHrl+9LTn9KB2vvKKtOQQ==}
+    engines: {node: '>=18'}
 
   '@ethereumjs/util@8.1.0':
     resolution: {integrity: sha512-zQ0IqbdX8FZ9aw11vP+dZkKDkS+kgIvQPHnSAXzP9pLu+Rfu3D3XEeLbicvoXJTYnhZiPmsZUxgdzXwNKxRPbA==}
@@ -243,6 +252,10 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
+  '@noble/ciphers@1.3.0':
+    resolution: {integrity: sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==}
+    engines: {node: ^14.21.3 || >=16}
+
   '@noble/curves@1.2.0':
     resolution: {integrity: sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==}
 
@@ -251,6 +264,10 @@ packages:
 
   '@noble/curves@1.8.2':
     resolution: {integrity: sha512-vnI7V6lFNe0tLAuJMu+2sX+FcL14TaCWy1qiczg1VwRmPrpQCdq5ESXQMqUc2tluRNf6irBXrWbl1mGN8uaU/g==}
+    engines: {node: ^14.21.3 || >=16}
+
+  '@noble/curves@1.9.0':
+    resolution: {integrity: sha512-7YDlXiNMdO1YZeH6t/kvopHHbIZzlxrCV9WLqCY6QhcXOoXiNCMDqJIglZ9Yjx5+w7Dz30TITFrlTjnRg7sKEg==}
     engines: {node: ^14.21.3 || >=16}
 
   '@noble/hashes@1.2.0':
@@ -426,11 +443,18 @@ packages:
     peerDependencies:
       hardhat: ^2.24.0
 
-  '@parity/hardhat-polkadot@0.1.6':
-    resolution: {integrity: sha512-6uVGQcbNVDK5vqpznT/YsDL+zKRCCszb244/8SMZ2XbEnG9+T2pvGKSXYTzLdQNNJqLTJONYpIkbVxo9ojjsBA==}
+  '@parity/hardhat-polkadot-resolc@0.1.7':
+    resolution: {integrity: sha512-Dqx9R7857PQIk9ArcpA7vtaz94XMIanqeKSjCe4sxsru+WBFPccVX6tqyMVys2VsAfISsJj/I9vUVMaR0CRItw==}
+    peerDependencies:
+      hardhat: ^2.26.0
+
+  '@parity/hardhat-polkadot@0.1.5':
+    resolution: {integrity: sha512-bRMVr5RSmhjGT6i9oWJMdz2hrTbiUn92u+TZnFCmm8IV2/NUnWEKCfsiHy2rOn+cgAaAUlyQ0Tv2t+jI+b3FXg==}
     hasBin: true
     peerDependencies:
-      hardhat: ^2.24.0
+      '@parity/hardhat-polkadot-node': ^0.1.1
+      '@parity/hardhat-polkadot-resolc': ^0.1.3
+      hardhat: <2.23.0
     bundledDependencies:
       - '@parity/hardhat-polkadot-node'
       - '@parity/hardhat-polkadot-resolc'
@@ -493,11 +517,17 @@ packages:
   '@scure/bip32@1.4.0':
     resolution: {integrity: sha512-sVUpc0Vq3tXCkDGYVWGIZTRfnvu8LoTDaev7vbwh0omSvVORONr960MQWdKqJDCReIEmTj3PAr73O3aoxz7OPg==}
 
+  '@scure/bip32@1.7.0':
+    resolution: {integrity: sha512-E4FFX/N3f4B80AKWp5dP6ow+flD1LQZo/w8UnLGYZO674jS6YnYeepycOOksv+vLPSpgN35wgKgy+ybfTb2SMw==}
+
   '@scure/bip39@1.1.1':
     resolution: {integrity: sha512-t+wDck2rVkh65Hmv280fYdVdY25J9YeEUIgn2LG1WM6gxFkGzcksoDiUkWVpVp3Oex9xGC68JU2dSbUfwZ2jPg==}
 
   '@scure/bip39@1.3.0':
     resolution: {integrity: sha512-disdg7gHuTDZtY+ZdkmLpPCk7fxZSu3gBiEGuoC1XYxv9cGx3Z6cpTggCgW6odSOOIXCiDjuGejW+aJKCY/pIQ==}
+
+  '@scure/bip39@1.6.0':
+    resolution: {integrity: sha512-+lF0BbLiJNwVlev4eKelw1WWLaiKXw7sSl8T6FvBlWkdX+94aGJ4o8XjUdlyhTCjd8c+B3KT3JfS8P0bLRNU6A==}
 
   '@sentry/core@5.30.0':
     resolution: {integrity: sha512-TmfrII8w1PQZSZgPpUESqjB+jC6MvZJZdLtE/0hZ+SrnKhW3x5WlYLvTXZpcWePYBku7rl2wn1RZu6uT0qCTeg==}
@@ -1159,6 +1189,10 @@ packages:
   ethereum-cryptography@2.2.1:
     resolution: {integrity: sha512-r/W8lkHSiTLxUxW8Rf3u4HGB0xQweG2RyETjywylKZSzLWoWAijRz8WCuOtJ6wah+avllXBqZuk29HCCvhEIRg==}
 
+  ethereum-cryptography@3.2.0:
+    resolution: {integrity: sha512-Urr5YVsalH+Jo0sYkTkv1MyI9bLYZwW8BENZCeE1QYaTHETEYx0Nv/SVsWkSqpYrzweg6d8KMY1wTjH/1m/BIg==}
+    engines: {node: ^14.21.3 || >=16, npm: '>=9'}
+
   ethereumjs-util@7.1.5:
     resolution: {integrity: sha512-SDl5kKrQAudFBUe5OJM9Ac6WmMyYmXX/6sTmLZ3ffG2eY6ZIGBes3pEDxNN6V72WyOw4CPD5RomKdsa8DAAwLg==}
     engines: {node: '>=10.0.0'}
@@ -1266,6 +1300,11 @@ packages:
 
   fs-readdir-recursive@1.1.0:
     resolution: {integrity: sha512-GNanXlVr2pf02+sPN40XN8HG+ePaNcvM0q5mZBd668Obwb0yD5GiUbZOFgwn8kGMY6I3mdyDJzieUy3PTYyTRA==}
+
+  fs-xattr@0.4.0:
+    resolution: {integrity: sha512-Lw90zx483YTGiHfR67IPtrbrZ+yBr1/W98v/iyTeSkUbixg/wrHfX5x9oMUOnirC5P7SZ5HlrpnIRMMqt8Ej0A==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    os: ['!win32']
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -2462,9 +2501,16 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
+  '@ethereumjs/rlp@10.0.0': {}
+
   '@ethereumjs/rlp@4.0.1': {}
 
   '@ethereumjs/rlp@5.0.2': {}
+
+  '@ethereumjs/util@10.0.0':
+    dependencies:
+      '@ethereumjs/rlp': 10.0.0
+      ethereum-cryptography: 3.2.0
 
   '@ethereumjs/util@8.1.0':
     dependencies:
@@ -2765,6 +2811,8 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
+  '@noble/ciphers@1.3.0': {}
+
   '@noble/curves@1.2.0':
     dependencies:
       '@noble/hashes': 1.3.2
@@ -2776,6 +2824,10 @@ snapshots:
   '@noble/curves@1.8.2':
     dependencies:
       '@noble/hashes': 1.7.2
+
+  '@noble/curves@1.9.0':
+    dependencies:
+      '@noble/hashes': 1.8.0
 
   '@noble/hashes@1.2.0': {}
 
@@ -2981,22 +3033,44 @@ snapshots:
       - '@swc/wasm'
       - supports-color
 
-  '@parity/hardhat-polkadot@0.1.6(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))':
+  '@parity/hardhat-polkadot-resolc@0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))':
     dependencies:
-      '@openzeppelin/contracts': 5.3.0
-      enquirer: 2.3.0
+      '@ethereumjs/util': 10.0.0
+      '@parity/resolc': 0.2.0(debug@4.4.1)
+      '@types/debug': 4.1.12
+      '@types/node': 22.15.30
+      axios: 1.9.0(debug@4.4.1)
+      chalk: 4.1.2
+      debug: 4.4.1(supports-color@8.1.1)
       find-up: 5.0.0
       fs-extra: 11.3.0
+      fs-xattr: 0.4.0
+      hardhat: 2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)
+      semver: 7.7.2
+      ts-node: 10.9.2(@types/node@22.15.30)(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - supports-color
+
+  '@parity/hardhat-polkadot@0.1.5(@parity/hardhat-polkadot-node@0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(@parity/hardhat-polkadot-resolc@0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))':
+    dependencies:
+      '@openzeppelin/contracts': 5.3.0
+      '@parity/hardhat-polkadot-node': 0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+      '@parity/hardhat-polkadot-resolc': 0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+      enquirer: 2.3.0
+      find-up: 5.0.0
       hardhat: 2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)
       picocolors: 1.1.1
 
-  '@parity/resolc@0.2.0':
+  '@parity/resolc@0.2.0(debug@4.4.1)':
     dependencies:
       '@types/node': 22.15.30
       commander: 13.1.0
       package-json: 10.0.1
       resolve-pkg: 2.0.0
-      solc: 0.8.30
+      solc: 0.8.30(debug@4.4.1)
     transitivePeerDependencies:
       - debug
 
@@ -3051,6 +3125,12 @@ snapshots:
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.9
 
+  '@scure/bip32@1.7.0':
+    dependencies:
+      '@noble/curves': 1.9.0
+      '@noble/hashes': 1.8.0
+      '@scure/base': 1.2.6
+
   '@scure/bip39@1.1.1':
     dependencies:
       '@noble/hashes': 1.2.0
@@ -3060,6 +3140,11 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.9
+
+  '@scure/bip39@1.6.0':
+    dependencies:
+      '@noble/hashes': 1.8.0
+      '@scure/base': 1.2.6
 
   '@sentry/core@5.30.0':
     dependencies:
@@ -3799,6 +3884,14 @@ snapshots:
       '@scure/bip32': 1.4.0
       '@scure/bip39': 1.3.0
 
+  ethereum-cryptography@3.2.0:
+    dependencies:
+      '@noble/ciphers': 1.3.0
+      '@noble/curves': 1.9.0
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+
   ethereumjs-util@7.1.5:
     dependencies:
       '@types/bn.js': 5.2.0
@@ -3971,6 +4064,8 @@ snapshots:
       universalify: 2.0.1
 
   fs-readdir-recursive@1.1.0: {}
+
+  fs-xattr@0.4.0: {}
 
   fs.realpath@1.0.0: {}
 
@@ -4835,7 +4930,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  solc@0.8.30:
+  solc@0.8.30(debug@4.4.1):
     dependencies:
       command-exists: 1.2.9
       commander: 8.3.0
@@ -5120,10 +5215,12 @@ snapshots:
     dependencies:
       '@fastify/busboy': 2.1.1
 
-  uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)):
+  uniswap-lib-polkadot@https://codeload.github.com/papermoonio/uniswap-lib-polkadot/tar.gz/43f613c9e9e1d3507af27b9d118b9e866190bc83(@parity/hardhat-polkadot-node@0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(@parity/hardhat-polkadot-resolc@0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)):
     dependencies:
-      '@parity/hardhat-polkadot': 0.1.6(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
+      '@parity/hardhat-polkadot': 0.1.5(@parity/hardhat-polkadot-node@0.1.2(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(@parity/hardhat-polkadot-resolc@0.1.7(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3)))(hardhat@2.24.2(ts-node@10.9.2(@types/node@22.15.30)(typescript@5.8.3))(typescript@5.8.3))
     transitivePeerDependencies:
+      - '@parity/hardhat-polkadot-node'
+      - '@parity/hardhat-polkadot-resolc'
       - hardhat
 
   uniswap-v2-polkadot@https://codeload.github.com/papermoonio/uniswap-v2-polkadot/tar.gz/292b2b669d2473c8dff8b6441731f3ae389dc6bf: {}

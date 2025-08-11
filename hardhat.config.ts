@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
       ? {
           polkavm: true,
           nodeConfig: {
-            nodeBinaryPath: "../substrate-node",
+            nodeBinaryPath: "../revive-dev-node",
             rpcPort: 8000,
             dev: true,
           },
