@@ -3,7 +3,7 @@
 // import { Contract } from 'ethers'
 // import { expandTo18Decimals } from './shared/utilities'
 // import { v2Fixture } from './shared/fixtures'
-// import ExampleFlashSwapArtifact from '../build/ExampleFlashSwap.json'
+// import ExampleFlashSwap from '../build/ExampleFlashSwap.json'
 
 // describe('ExampleFlashSwap', () => {
 //   let WETH: Contract
@@ -19,12 +19,10 @@
 //     WETH = fixture.WETH
 //     WETHPartner = fixture.WETHPartner
 //     // WETHExchangeV1 = fixture.WETHExchangeV1
+//     const ExampleFlashSwap = await ethers.getContractFactory('ExampleFlashSwap')
 //     WETHPair = fixture.WETHPair
-//     flashSwapExample = await ethers.deployContract(
-//       ExampleFlashSwapArtifact.abi,
-//       ExampleFlashSwapArtifact.bytecode,
-//       [fixture.factoryV2.address, fixture.factoryV1.address, fixture.router.address]
-//     )
+//     flashSwapExample = await ExampleFlashSwap.deploy(await fixture.factoryV2.getAddress(), fixture.factoryV1.address, fixture.router.address)
+    
 //     await flashSwapExample.waitForDeployment()
 //   })
 

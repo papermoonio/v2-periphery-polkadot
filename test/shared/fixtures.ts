@@ -3,6 +3,8 @@ import { Contract } from "ethers";
 import { expandTo18Decimals } from './utilities';
 import { getWallets } from "./utilities";
 
+declare const hre: any;
+
 // interface IUniswapV1Factory {
 //   initializeFactory(exchangeTemplate: string): Promise<any>;
 //   createExchange(token: string): Promise<any>;
@@ -43,7 +45,6 @@ const overrides = {
 
 export async function v2Fixture(): Promise<V2Fixture> {
   const [wallet] = await ethers.getSigners();
-  const [walletForLargeContract] = getWallets(1);
 
   // deploy tokens
   const ERC20 = await ethers.getContractFactory("ERC20");
@@ -71,8 +72,21 @@ export async function v2Fixture(): Promise<V2Fixture> {
   await factoryV2.waitForDeployment();
 
   // deploy routers
-  const UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01", walletForLargeContract);
-  const UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02", walletForLargeContract);
+  let UniswapV2Router01;
+  let UniswapV2Router02;
+  let UniswapV2Pair;
+  if (hre.network.config.polkavm === true) {
+    let walletForLargeContract: any;
+    [walletForLargeContract] = getWallets(1);
+    UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01", walletForLargeContract);
+    UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02", walletForLargeContract);
+    UniswapV2Pair = await ethers.getContractFactory("UniswapV2Pair", walletForLargeContract);
+  } else {
+    UniswapV2Router01 = await ethers.getContractFactory("UniswapV2Router01");
+    UniswapV2Router02 = await ethers.getContractFactory("UniswapV2Router02");
+    UniswapV2Pair = await ethers.getContractFactory("UniswapV2Pair");
+  }
+  
   const router01 = (await UniswapV2Router01.deploy(await factoryV2.getAddress(), await WETH.getAddress())) as unknown as BaseContract;
   await router01.waitForDeployment();
 
@@ -95,7 +109,6 @@ export async function v2Fixture(): Promise<V2Fixture> {
   // const WETHExchangeV1 = (await ethers.getContractAt("UniswapV1Exchange", WETHExchangeV1Address)) as unknown as BaseContract;
 
   // upload Pair contracts
-  const UniswapV2Pair = await ethers.getContractFactory("UniswapV2Pair", walletForLargeContract);
   const pairForUpload = await UniswapV2Pair.deploy();
   await pairForUpload.waitForDeployment();
 

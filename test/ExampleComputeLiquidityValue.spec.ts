@@ -24,10 +24,17 @@ describe("ExampleComputeLiquidityValue", () => {
     pair = fixture.pair;
     factory = fixture.factoryV2;
     router = fixture.router;
-    [walletForLargeContract] = getWallets(1);
+    let ExampleComputeLiquidityValue: any;
+    if (hre.network.polkavm === true) { 
+      [walletForLargeContract] = getWallets(1);
+      ExampleComputeLiquidityValue = await ethers.getContractFactory("ExampleComputeLiquidityValue", walletForLargeContract);
+    } else {
+      ExampleComputeLiquidityValue = await ethers.getContractFactory("ExampleComputeLiquidityValue");
+    }
 
-    const ExampleComputeLiquidityValue = await ethers.getContractFactory("ExampleComputeLiquidityValue", walletForLargeContract);
-    computeLiquidityValue = await ExampleComputeLiquidityValue.deploy(await factory.getAddress()) as unknown as Contract;
+    computeLiquidityValue = await ExampleComputeLiquidityValue.deploy(
+      await factory.getAddress()
+    ) as unknown as Contract;
     await computeLiquidityValue.waitForDeployment();
   });
 

@@ -16,7 +16,9 @@ describe('UniswapV2Router02', () => {
   let walletPrivKey: string
 
   beforeEach(async function() {
-  [wallet, walletPrivKey] = [(await ethers.getSigners())[0], (hre.network.config.accounts as string[])[0]]
+    wallet = (await ethers.getSigners())[0]
+    const accounts = hre.network.config.accounts
+    walletPrivKey = Array.isArray(accounts) ? accounts[0] : '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
     const fixture = await v2Fixture()
     token0 = fixture.token0
     token1 = fixture.token1
@@ -93,7 +95,9 @@ describe('fee-on-transfer tokens', () => {
   let pair: any
 
   beforeEach(async function() {
-    [wallet, walletPrivKey] = [(await ethers.getSigners())[0], (hre.network.config.accounts as string[])[0]]
+    wallet = (await ethers.getSigners())[0]
+    const accounts = hre.network.config.accounts
+    walletPrivKey = Array.isArray(accounts) ? accounts[0] : '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
     const fixture = await v2Fixture()
     WETH = fixture.WETH
     router = fixture.router02

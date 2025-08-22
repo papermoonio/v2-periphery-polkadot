@@ -29,7 +29,9 @@ describe('UniswapV2Router{01,02}', () => {
     let walletPrivKey: string
 
     beforeEach(async function() {
-      [wallet, walletPrivKey] = [(await ethers.getSigners())[0], (hre.network.config.accounts as string[])[0]]
+      wallet = (await ethers.getSigners())[0]
+      const accounts = hre.network.config.accounts
+      walletPrivKey = Array.isArray(accounts) ? accounts[0] : '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80'
       const fixture = await v2Fixture()
       token0 = fixture.token0
       token1 = fixture.token1
@@ -172,12 +174,6 @@ describe('UniswapV2Router{01,02}', () => {
       })
 
       it('removeLiquidityETH', async () => {
-        const CodeHelper = await ethers.getContractFactory("CodeHelper");
-        const codeHelper = await CodeHelper.deploy();
-        await codeHelper.waitForDeployment();
-        const codeHash = await codeHelper.pairCodeHash();
-        console.log("codeHash: ", codeHash);
-
         const WETHPartnerAmount = expandTo18Decimals(1)
         const ETHAmount = expandTo18Decimals(4)
         await WETHPartner.transfer(await WETHPair.getAddress(), WETHPartnerAmount)
@@ -242,8 +238,13 @@ describe('UniswapV2Router{01,02}', () => {
           { owner: wallet.address, spender: await router.getAddress(), value: expectedLiquidity - MINIMUM_LIQUIDITY },
           nonce,
           MaxUint256
-        ) as string
-         const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(walletPrivKey.slice(2), 'hex'))
+        )
+        
+        if (!digest) {
+          throw new Error(`digest is undefined. pair: ${await pair.getAddress()}, nonce: ${nonce}`)
+        }
+        
+        const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(walletPrivKey.slice(2), 'hex'))
 
         await (await router.removeLiquidityWithPermit(
           await token0.getAddress(),
@@ -272,11 +273,11 @@ describe('UniswapV2Router{01,02}', () => {
 
         const nonce = await WETHPair.nonces(wallet.address)
         const digest = await getApprovalDigest(
-          await WETHPair,
+          WETHPair,
           { owner: wallet.address, spender: await router.getAddress(), value: expectedLiquidity - MINIMUM_LIQUIDITY },
           nonce,
           MaxUint256
-        ) as string
+        )
         const { v, r, s } = ecsign(Buffer.from(digest.slice(2), 'hex'), Buffer.from(walletPrivKey.slice(2), 'hex'))
 
         await (await router.removeLiquidityETHWithPermit(

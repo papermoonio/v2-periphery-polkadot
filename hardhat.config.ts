@@ -3,6 +3,9 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
 import "@parity/hardhat-polkadot";
 import * as dotenv from "dotenv";
+// Import custom tasks
+import "./tasks/update-pair-code-hash";
+import "./tasks/test-with-hash-update";
 dotenv.config();
 
 const usePolkaVM = process.env.USE_POLKAVM === "true";
@@ -32,7 +35,9 @@ const config: HardhatUserConfig = {
             dev: true,
           },
         }
-      : {},
+      : {
+        allowUnlimitedContractSize: true,
+      },
     local: {
       polkavm: true,
       url: 'http://127.0.0.1:8545',

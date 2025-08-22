@@ -20,7 +20,12 @@ describe('ExampleSwapToPrice', () => {
     token1 = fixture.token1
     pair = fixture.pair
     router = fixture.router
-    const ExampleSwapToPrice = await ethers.getContractFactory('ExampleSwapToPrice', getWallets(1)[0])
+    let ExampleSwapToPrice: any;
+    if (hre.network.config.polkavm === true) {
+      ExampleSwapToPrice = await ethers.getContractFactory('ExampleSwapToPrice', getWallets(1)[0])
+    } else {
+      ExampleSwapToPrice = await ethers.getContractFactory('ExampleSwapToPrice')
+    }
     swapToPriceExample = await ExampleSwapToPrice.deploy(await fixture.factoryV2.getAddress(), await fixture.router.getAddress())
     await swapToPriceExample.waitForDeployment();
   })
