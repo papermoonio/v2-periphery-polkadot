@@ -2,5 +2,6 @@
 pragma solidity ^0.8.0;
 
 library CodeHelper {
-    bytes32 constant PAIR_CODE_HASH = 0x95944f53a59004ae8057078b8ef1320c519fa14f2683691ea2fe2fb2533b3ee5;
+    bytes32 constant PAIR_CODE_HASH =
+        0xdcb86c306840eeb12c4c621603ea99910ba391e9031812834d007e0bd6c05c90;
 }

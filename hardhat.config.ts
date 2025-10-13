@@ -4,14 +4,22 @@ import "@nomicfoundation/hardhat-ethers";
 import "@parity/hardhat-polkadot";
 import * as dotenv from "dotenv";
 // Import custom tasks
-import "./tasks/update-pair-code-hash";
-import "./tasks/test-with-hash-update";
+// import "./tasks/update-pair-code-hash";
+// import "./tasks/test-with-hash-update";
 dotenv.config();
 
 const usePolkaVM = process.env.USE_POLKAVM === "true";
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.30",
+  solidity: {
+    version: "0.8.30",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 999999,
+      },
+    }
+  },
   resolc: {
     compilerSource: "binary",
     settings: {
@@ -39,7 +47,7 @@ const config: HardhatUserConfig = {
         allowUnlimitedContractSize: true,
       },
     local: {
-      polkavm: true,
+      // polkavm: true,
       url: 'http://127.0.0.1:8545',
       accounts: [
         process.env.LOCAL_PRIV_KEY as string,
