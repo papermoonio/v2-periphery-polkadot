@@ -3,6 +3,8 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
 import "@parity/hardhat-polkadot";
 import * as dotenv from "dotenv";
+import * as fs from "fs";
+import * as path from "path";
 // Import custom tasks
 // import "./tasks/update-pair-code-hash";
 // import "./tasks/test-with-hash-update";
@@ -52,13 +54,6 @@ const config: HardhatUserConfig = {
       accounts: [
         '0x5fb92d6e98884f76de468fa3f6278f8807c48bebc13595d45af5bdc4da702133',
         '0x8075991ce870b93a8870eca0c0f91913d12f47948ca0fd25b49c6fa7cdbeee8b'
-      ],
-    },
-    ah: {
-      polkavm: true,
-      url: "https://westend-asset-hub-eth-rpc.polkadot.io",
-      accounts: [
-        process.env.AH_PRIV_KEY as string,
       ],
     },
   }
